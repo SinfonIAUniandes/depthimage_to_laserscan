@@ -87,6 +87,8 @@ bool DepthImageToLaserScan::use_point(const float new_value, const float old_val
 
 sensor_msgs::LaserScanPtr DepthImageToLaserScan::convert_msg(const sensor_msgs::ImageConstPtr& depth_msg,
         const sensor_msgs::CameraInfoConstPtr& info_msg){
+          
+  const_cast<sensor_msgs::CameraInfo*>(info_msg.get())->distortion_model = "plumb_bob";
   // Set camera model
   cam_model_.fromCameraInfo(info_msg);
 
